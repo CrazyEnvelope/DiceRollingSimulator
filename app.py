@@ -1,17 +1,29 @@
 import tkinter as tk
-from multiprocessing.connection import answer_challenge
 from tkinter import PhotoImage
-
+import customtkinter
+import random
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
+        self.imgDiceLoc = {
+            1: "./img/dice_faces/Side_1_Pips.png",
+            2: "./img/dice_faces/Side_2_Pips.png",
+            3: "./img/dice_faces/Side_3_Pips.png",
+            4: "./img/dice_faces/Side_4_Pips.png",
+            5: "./img/dice_faces/Side_5_Pips.png",
+            6: "./img/dice_faces/Side_6_Pips.png"
+        }
+
+        widthW,heightW = (800,600)
+        widthC,heightC = (340,340)
+
         #window setup
         self.title('Dice Rolling Simulator')
         self.geometry('800x600')
-        self.maxsize(800,600)
-        self.minsize(800,600)
+        self.maxsize(widthW,heightW)
+        self.minsize(widthW,heightW)
         self.configure(background='#2b2b2a')
         self.resizable(0,0)
 
@@ -20,13 +32,47 @@ class App(tk.Tk):
         self.diceNumber.config(font=("Arial",25), fg = "white", bg="#2b2b2a")
         self.diceNumber.place(relx = 0.5, rely=0.1, anchor=tk.CENTER)
 
-        self.faceImage = PhotoImage(file = r"E:\Projects\DiceRollingSimulator\img\dice_faces\Side_1_Pips.png")
+        self.faceImage = PhotoImage(file = r"./img/dice_faces/Side_1_Pips.png")
         self.faceImageDice = self.faceImage.subsample(3,3)
-        tk.Label(self , image = self.faceImageDice).place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+        self.canvas = tk.Canvas(self,bg="#2b2b2a",width=widthC,height=heightC, highlightthickness=0)
+        self.canvas_image_id = self.canvas.create_image(widthC/2,heightC/2,image = self.faceImageDice)
+        self.canvas.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
 
-        self.rollButton = tk.Button(self,text='Roll')
-        self.rollButton.place(relx = 0.5, rely = 0.88, anchor=tk.CENTER)
+        self.rollButton = customtkinter.CTkButton(
+            self,
+            text='Roll!',
+            border_color='white',
+            border_width=3,
+            border_spacing=10,
+            corner_radius=50,
+            font=("Arial",24),
+            height = 50,
+            width = 150
+        )
+        self.rollButton.place(relx = 0.5, rely = 0.88,anchor=tk.CENTER)
 
+    def rollDice(self):
+        self.rollButton.configure(state = "disabled")
+
+        numbers = [1,2,3,4,5,6]
+        random.shuffle(numbers)
+
+        self.diceNumber.config(text="Waiting...")
+
+        for i, number in enumerate(numbers):
+            self.after(i * 150, lambda num=number:self.rollAnimation(num))
+
+        final = numbers[len(numbers)-1]
+        self.after(len(numbers) * 150, lambda: self.finishRoll(final))
+
+    def rollAnimation(self,number):
+        self.newfaceImageDice = PhotoImage(file=self.imgDiceLoc[number]).subsample(3, 3)
+        self.canvas.itemconfig(self.canvas_image_id, image=self.newfaceImageDice)
+        self.faceImageDice = self.newfaceImageDice
+
+    def finishRoll(self,final):
+        self.diceNumber.config(text=str(final))
+        self.rollButton.configure(state="normal")
 
 
 
