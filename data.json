@@ -1,0 +1,20 @@
+{
+  "themes": {
+        "default": {
+          "imgFaceDice1": "./img/dice_faces/Side_1_Pips.png",
+          "imgFaceDice2": "./img/dice_faces/Side_2_Pips.png",
+          "imgFaceDice3": "./img/dice_faces/Side_3_Pips.png",
+          "imgFaceDice4": "./img/dice_faces/Side_4_Pips.png",
+          "imgFaceDice5": "./img/dice_faces/Side_5_Pips.png",
+          "imgFaceDice6": "./img/dice_faces/Side_6_Pips.png"
+        },
+        "wood": {
+        "imgFaceDice1": "./img/dice_faces/Side_1_Pips.png",
+        "imgFaceDice2": "./img/dice_faces/Side_2_Pips.png",
+        "imgFaceDice3": "./img/dice_faces/Side_3_Pips.png",
+        "imgFaceDice4": "./img/dice_faces/Side_4_Pips.png",
+        "imgFaceDice5": "./img/dice_faces/Side_5_Pips.png",
+        "imgFaceDice6": "./img/dice_faces/Side_6_Pips.png"
+        }
+      }
+}

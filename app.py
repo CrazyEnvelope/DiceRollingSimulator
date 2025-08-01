@@ -2,11 +2,15 @@ import tkinter as tk
 from tkinter import PhotoImage
 import customtkinter
 import random
+import json
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
 
+        with open('data.json','r') as file:
+            data = json.load(file)
+        
         self.imgDiceLoc = {
             1: "./img/dice_faces/Side_1_Pips.png",
             2: "./img/dice_faces/Side_2_Pips.png",
@@ -50,6 +54,34 @@ class App(tk.Tk):
             width = 150
         )
         self.rollButton.place(relx = 0.5, rely = 0.88,anchor=tk.CENTER)
+
+        self.leaderBoardButton = customtkinter.CTkButton(
+            self,
+            text='Leaderboard',
+            border_color='white',
+            border_width=3,
+            border_spacing=10,
+            corner_radius=50,
+            font=("Arial", 24),
+            height=50,
+            width=150
+        )
+        self.leaderBoardButton.place(relx=0.2, rely=0.88, anchor=tk.CENTER)
+
+        self.changeBackgroundButton = customtkinter.CTkButton(
+            self,
+            text='Change Theme!',
+            border_color='white',
+            border_width=3,
+            border_spacing=10,
+            corner_radius=50,
+            font=("Arial", 24),
+            height=50,
+            width=150
+        )
+
+        self.changeBackgroundButton.place(relx = 0.8, rely = 0.88,anchor=tk.CENTER)
+
 
     def rollDice(self):
         self.rollButton.configure(state = "disabled")

@@ -1,7 +1,15 @@
 import app
-import functions
+import leaderboard
+import enterplayers
+
+#def openLeaderBoard():
+#    leaderboardApp = leaderboard.Leaderboard()
 
 if __name__ == "__main__":
-    app = app.App()
-    app.rollButton.configure(command=app.rollDice)
-    app.mainloop()
+    enterplayersApp = enterplayers.EnterPlayers()
+    enterplayersApp.mainloop()
+
+    #diceApp = app.App()
+    #diceApp.rollButton.configure(command=diceApp.rollDice)
+    #diceApp.leaderBoardButton.configure(command=openLeaderBoard)
+    #diceApp.mainloop()
