@@ -32,7 +32,7 @@ class Leaderboard(tk.Tk):
                 player['totalscore'],
                 player['rolls'],
                 round(player['totalscore'] / player['rolls'], 2) if player['rolls'] > 0 else 0,
-                player['lastplayed']
+                "test"
             ]
             for col, value in enumerate(values):
                 e = tk.Entry(self, width=15, fg='blue', font=('Arial', 12))

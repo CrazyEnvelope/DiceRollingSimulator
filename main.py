@@ -6,6 +6,7 @@ def openLeaderBoard():
     leaderboardApp = leaderboard.Leaderboard()
 
 def startGame():
+    enterplayersApp.destroy()
     diceApp = app.App()
     diceApp.rollButton.configure(command=diceApp.rollDice)
     diceApp.leaderBoardButton.configure(command=openLeaderBoard)

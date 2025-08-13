@@ -1,9 +1,16 @@
 [
     {
         "rank": 0,
-        "playername": "Alex",
+        "playername": "Andreea",
         "totalscore": 0,
         "rolls": 0,
-        "lastplayed": "2000-01-01 00:00"
+        "lastplayed": "yyyy-mm-dd hh:mm"
+    },
+    {
+        "rank": 0,
+        "playername": "Dan",
+        "totalscore": 1,
+        "rolls": 1,
+        "lastplayer": "2025-8-13 22:47"
     }
 ]
