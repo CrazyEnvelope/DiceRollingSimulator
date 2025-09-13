@@ -1,16 +1,26 @@
 [
     {
         "rank": 0,
-        "playername": "Andreea",
-        "totalscore": 0,
-        "rolls": 0,
-        "lastplayed": "yyyy-mm-dd hh:mm"
+        "playername": "A",
+        "totalscore": 4,
+        "rolls": 3,
+        "lastplayed": "yyyy-mm-dd hh:mm",
+        "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
     },
     {
         "rank": 0,
-        "playername": "Dan",
-        "totalscore": 1,
-        "rolls": 1,
-        "lastplayer": "2025-8-13 22:47"
+        "playername": "B",
+        "totalscore": 2,
+        "rolls": 2,
+        "lastplayed": "yyyy-mm-dd hh:mm",
+        "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
+    },
+    {
+        "rank": 0,
+        "playername": "C",
+        "totalscore": 9,
+        "rolls": 2,
+        "lastplayed": "yyyy-mm-dd hh:mm",
+        "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
     }
 ]

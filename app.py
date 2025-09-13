@@ -128,24 +128,35 @@ class App(tk.Tk):
             playerData = json.load(file)
 
         current_name = self.currentPlayer.cget("text").replace("Current Player:\n ", "")
-        tempPlayerData = {}
+
         for i,player in enumerate(playerData):
             if player['playername'] == current_name:
                 current_time = datetime.datetime.now()
-                tempPlayerData = {
-                    'rank' : 0,
-                    'playername' : current_name,
-                    'totalscore' : player['totalscore'] + number,
-                    'rolls' : player['rolls'] + 1,
-                    'lastplayer' : f"{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
-                }
-                del playerData[i]
+                player['rank'] = 0
+                player['playername'] = current_name
+                player['totalscore'] = player['totalscore'] + number
+                player['rolls'] = player['rolls'] + 1
+                player['lastplayer'] = "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
+
+                print(i)
+
+                if len(playerData) != 1:
+                    if i == len(playerData) - 1:
+                        self.currentPlayer.config(text=f"Current Player:\n {playerData[0]['playername']}")
+                        self.nextPlayer.config(text=f"Next Player:\n {playerData[1]['playername']}")
+                    else:
+                        self.currentPlayer.config(text=f"Current Player:\n {playerData[i + 1]['playername']}")
+
+                    if i + 2 == len(playerData):
+                        self.nextPlayer.config(text=f"Next Player:\n {playerData[0]['playername']}")
+                    else:
+                        if i != len(playerData) - 1:
+                            self.nextPlayer.config(text=f"Next Player:\n {playerData[i + 2]['playername']}")
+
                 break
-        playerData.append(tempPlayerData)
+
         with open('playerdata.json', 'w') as file:
             json.dump(playerData, file, indent=4)
-
-
 
 
     def rollAnimation(self,number):
