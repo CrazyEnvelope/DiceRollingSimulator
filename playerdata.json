@@ -1,24 +1,24 @@
 [
     {
         "rank": 0,
-        "playername": "A",
-        "totalscore": 4,
+        "playername": "Marius",
+        "totalscore": 14,
         "rolls": 3,
         "lastplayed": "yyyy-mm-dd hh:mm",
         "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
     },
     {
         "rank": 0,
-        "playername": "B",
-        "totalscore": 2,
-        "rolls": 2,
+        "playername": "Dan",
+        "totalscore": 16,
+        "rolls": 3,
         "lastplayed": "yyyy-mm-dd hh:mm",
         "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
     },
     {
         "rank": 0,
-        "playername": "C",
-        "totalscore": 9,
+        "playername": "John",
+        "totalscore": 11,
         "rolls": 2,
         "lastplayed": "yyyy-mm-dd hh:mm",
         "lastplayer": "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"

@@ -3,8 +3,10 @@ from tkinter import ttk
 import customtkinter
 import random
 import json
+import re
 
 presentPlayers = []
+regex = re.compile('[@_!#$%^&*()<>?/\|}{~:]')
 
 class EnterPlayers(tk.Tk):
     def __init__(self):
@@ -35,35 +37,72 @@ class EnterPlayers(tk.Tk):
         self.textbox.place(relx=0.1, rely=0.3,anchor = tk.NW)
 
         #button to add user
-        self.addUserButton = tk.Button(self, text="Add user", font=("Helvetica",10))
-        self.addUserButton.place(relx=0.9,rely=0.29, anchor = tk.NE)
+        self.addUserButton = customtkinter.CTkButton(
+            self,
+            text='Add user',
+            border_color='white',
+            border_width=1,
+            border_spacing=5,
+            corner_radius=10,
+            font=("Helvetica", 15,'bold'),
+            height=20,
+            width=50
+        )
+        self.addUserButton.place(relx=0.9, rely=0.29, anchor=tk.NE)
 
         # button to start the game
-        self.startButton = tk.Button(self, text="Start", font=("Helvetica", 10))
-        self.startButton.place(relx=0.9, rely=0.48, anchor=tk.NE)
-        self.startButton.config(width=6)
+        self.startButton = customtkinter.CTkButton(
+            self,
+            text='Start',
+            border_color='white',
+            border_width=1,
+            border_spacing=5,
+            corner_radius=10,
+            font=("Helvetica bold", 15,'bold'),
+            height = 20,
+            width=50,
+            hover_color = "#267b0d",
+            fg_color = "#447A09"
+        )
+        self.startButton.place(relx=0.9, rely=0.49, anchor=tk.NE)
+
+        # Error messages
+        self.errorMsg = tk.Label(self,
+                                  text="",
+                                  font=("Helvetica", 10), background="#2b2b2a", foreground="red")
+        self.errorMsg.place(relx=0.1, rely=0.7, anchor=tk.NW)
 
 
     def enterPlayers(self):
         global presentPlayers
         playerFromTextBox = self.textbox.get(1.0,"end-1c")
-        presentPlayers.append(playerFromTextBox)
-        self.combobox.configure(values=presentPlayers)
 
-        presentPlayersDict = []
-        for player in presentPlayers:
-            presentPlayersDict.append(
-                {
-                    "rank": 0,
-                    "playername": player,
-                    "totalscore": 0,
-                    "rolls": 0,
-                    "lastplayed": "yyyy-mm-dd hh:mm"
-                }
-            )
+        if regex.search(playerFromTextBox) == None:
+           if playerFromTextBox != "":
+               presentPlayers.append(playerFromTextBox)
+               self.combobox.configure(values=presentPlayers)
 
-        with open('playerdata.json', 'w') as file:
-            json.dump(presentPlayersDict,file,indent=4)
+               presentPlayersDict = []
+               for player in presentPlayers:
+                   presentPlayersDict.append(
+                       {
+                           "rank": 0,
+                           "playername": player,
+                           "totalscore": 0,
+                           "rolls": 0,
+                           "lastplayed": "yyyy-mm-dd hh:mm"
+                       }
+                   )
+
+               self.textbox.delete('1.0', tk.END)
+               self.errorMsg.config(text='')
+               with open('playerdata.json', 'w') as file:
+                   json.dump(presentPlayersDict, file, indent=4)
+           else:
+                self.errorMsg.config(text="Please, insert at least one name!")
+        else:
+            self.errorMsg.config(text="Please, do not insert any special characters!")
+
 
 
 

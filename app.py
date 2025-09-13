@@ -1,11 +1,14 @@
 import tkinter as tk
+from logging import disable
 from tkinter import PhotoImage
 import customtkinter
 import random
 import json
 import datetime
 
+
 playerData = []
+time_left = 0
 
 class App(tk.Tk):
     def __init__(self):
@@ -28,6 +31,9 @@ class App(tk.Tk):
            playerData = json.load(file)
 
         numberOfPlayers = len(playerData)
+
+        self.time_left = 1 * 60
+
         #window setup
         self.title('Dice Rolling Simulator')
         self.geometry('800x600')
@@ -40,6 +46,10 @@ class App(tk.Tk):
         self.diceNumber = tk.Label(self,text = 0)
         self.diceNumber.config(font=("Arial",25), fg = "white", bg="#2b2b2a")
         self.diceNumber.place(relx = 0.5, rely=0.1, anchor=tk.CENTER)
+
+        self.timeNumber = tk.Label(self, text=0)
+        self.timeNumber.config(font=("Arial", 25), fg="white", bg="#2b2b2a", text="02:00")
+        self.timeNumber.place(relx=0.5, rely=0.18, anchor=tk.CENTER)
 
         self.faceImage = PhotoImage(file = r"./img/dice_faces/Side_1_Pips.png")
         self.faceImageDice = self.faceImage.subsample(3,3)
@@ -138,7 +148,6 @@ class App(tk.Tk):
                 player['rolls'] = player['rolls'] + 1
                 player['lastplayer'] = "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
 
-                print(i)
 
                 if len(playerData) != 1:
                     if i == len(playerData) - 1:
@@ -167,6 +176,24 @@ class App(tk.Tk):
     def finishRoll(self,final):
         self.diceNumber.config(text=str(final))
         self.rollButton.configure(state="normal")
+        if self.time_left <= 0:
+            self.disableActions()
 
+    def countdown(self):
+        if self.time_left > 0:
+            mins, secs = divmod(self.time_left, 60)
+            timeformat = '{:02d}:{:02d}'.format(mins, secs)
+            self.timeNumber.config(text = timeformat)
+            self.time_left -= 1
+            self.after(1000, self.countdown)
+            if mins <= 0 and secs <= 30:
+                self.timeNumber.config(fg='red')
+        else:
+            self.disableActions()
+
+    def disableActions(self):
+        self.timeNumber.config(text="00:00")
+        self.rollButton.configure(state="disabled")
+        self.diceNumber.config(text="Game Over!")
 
 

@@ -6,11 +6,15 @@ def openLeaderBoard():
     leaderboardApp = leaderboard.Leaderboard()
 
 def startGame():
-    enterplayersApp.destroy()
-    diceApp = app.App()
-    diceApp.rollButton.configure(command=diceApp.rollDice)
-    diceApp.leaderBoardButton.configure(command=openLeaderBoard)
-    diceApp.mainloop()
+    if not enterplayersApp.combobox['values']:
+        enterplayersApp.errorMsg.config(text="Please, insert at least one name!")
+    else:
+        enterplayersApp.destroy()
+        diceApp = app.App()
+        diceApp.rollButton.configure(command=diceApp.rollDice)
+        diceApp.leaderBoardButton.configure(command=openLeaderBoard)
+        diceApp.countdown()
+        diceApp.mainloop()
 
 if __name__ == "__main__":
     enterplayersApp = enterplayers.EnterPlayers()
