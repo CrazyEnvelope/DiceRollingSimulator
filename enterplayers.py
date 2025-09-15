@@ -90,7 +90,7 @@ class EnterPlayers(tk.Tk):
                            "playername": player,
                            "totalscore": 0,
                            "rolls": 0,
-                           "lastplayed": "yyyy-mm-dd hh:mm"
+                           "lastplayed": "yyyy-mm-dd"
                        }
                    )
 

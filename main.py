@@ -4,6 +4,7 @@ import enterplayers
 
 def openLeaderBoard():
     leaderboardApp = leaderboard.Leaderboard()
+    leaderboardApp.grab_set()
 
 def startGame():
     if not enterplayersApp.combobox['values']:

@@ -146,7 +146,7 @@ class App(tk.Tk):
                 player['playername'] = current_name
                 player['totalscore'] = player['totalscore'] + number
                 player['rolls'] = player['rolls'] + 1
-                player['lastplayer'] = "{current_time.year}-{current_time.month}-{current_time.day} {current_time.hour}:{current_time.minute}"
+                player['lastplayed'] = f"{current_time.year}-{current_time.month}-{current_time.day}"
 
 
                 if len(playerData) != 1:
